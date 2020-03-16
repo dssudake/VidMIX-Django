@@ -16,6 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# Use include() to add URLS from catalog application and authentication system
+from django.urls import include
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',include('tools.urls')),
 ]
+
+# Use static() to add url mapping to serve Media files during development (only)
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static( settings.MEDIA_URL , document_root=settings.MEDIA_ROOT)

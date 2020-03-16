@@ -1,0 +1,34 @@
+{% extends "tools/base.html" %}
+{% load static %}
+
+
+{% block title %}
+HOME | VidMIX
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'tools/header.html' %}
+
+<!-- DISCRIPTION COLUMNS -->
+<div class="row justify-content-center mt-6">
+  <div class="col-xl-2 col-lg-3 col-md-4 col-sm-7 col-10">
+    <img class="asset_l" src="{% static 'images/trim.svg' %}" width="60px">
+    <h4>Trim & Replace</h4>
+    <p class="text-muted">
+      Trim videos into smaller snippets and replace, delete audio for unwanted parts. You can again combine the
+      trimmed clips to form video.
+    </p>
+  </div>
+  <div class="col-xl-2 col-lg-3 col-md-4 col-sm-7 col-10 text-md-left text-right">
+    <img class="asset_r mb-1" src="{% static 'images/split.svg' %}" width="50px">
+    <h4>Split & Combine</h4>
+    <p class="text-muted">
+      Cut longer videos into smaller snippets, delete unwanted parts and only keep what you like. You can also
+      combine multiple clips into 1 longer video.
+    </p>
+  </div>
+</div>
+
+{% endblock %}

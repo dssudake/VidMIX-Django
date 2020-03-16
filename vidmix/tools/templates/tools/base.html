@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+  <!-- CSS Links  -->
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{%static 'css/style_custom.css' %}">
+
+  <!-- JavaScript Links  -->
+  <script src="{%static 'js/jquery-3.4.1.js' %} "></script>
+  <script src="{%static 'js/bootstrap.min.js' %} "></script>
+  <script src="{%static 'js/angular.min.js' %} "></script>
+  <script src="{%static 'js/vidmix_custom.js' %} "></script>
+  <script src="{%static 'js/angular_custom.js' %} "></script>
+
+  <title>
+    {% block title %}
+    {% endblock %}
+  </title>
+
+</head>
+
+<body>
+  {% include 'tools/navbar.html' %}
+
+  <div class="container-fluid" ng-app="angularApp">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  {% include 'tools/footer.html' %}
+
+  {% block javascript %}
+  {% endblock %}
+</body>
+
+</html>

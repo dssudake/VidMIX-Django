@@ -1,0 +1,26 @@
+<!-- NAVBAR CONTENT -->
+<nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light shadow-sm" id="mainNav">
+  <div class="container-fluid mx-md-4 ml-2">
+    <a class="navbar-brand font-weight-bold" href="{% url 'home' %}">VidMIX</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse align-items-center" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto align-items-center">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tools</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

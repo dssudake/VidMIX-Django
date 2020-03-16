@@ -1,0 +1,48 @@
+{% extends "tools/base.html" %}
+{% load static %}
+
+
+{% block title %}
+CONTACT | VidMIX
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'tools/header.html' %}
+
+<!-- CONTACT CONTENT -->
+<div class="row justify-content-center mt-5">
+  <div>
+    <table class="table table-borderless ">
+      <thead class="text-center h4 font-weight-bold mb-5">
+        <tr>
+          <th scope="row" colspan="2">Follow Us on :</th>
+        </tr>
+      </thead>
+      <tbody class="h4">
+        <tr>
+          <th scope="row"><i class="fab fa-lg fa-github"></i></th>
+          <td>
+            <a href="https://github.com/dssudake" role="button" target="_blank"
+              style="text-decoration: none; color: black;">Github - dssudake </a>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row"><i class="fab fa-lg fa-linkedin-in"></i></th>
+          <td>Linkdin - VidMIX</td>
+        </tr>
+        <tr>
+          <th scope="row"><i class="fab fa-lg fa-twitter"></i></th>
+          <td>Twitter - VidMIX</td>
+        </tr>
+        <tr>
+          <th scope="row"><i class="fab fa-lg fa-google-plus-g"></i></th>
+          <td>Google - VidMIX</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # User defined applications 
+    'tools.apps.ToolsConfig',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +65,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # For reference the MEDIA_URL variable in template directories. 
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -118,3 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# To make Django familiar where media files are located.
+MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
+
+# The URL to use when referring to media files (Video, Audio, Documents, etc.)in scripts or various files in templates
+MEDIA_URL= "/media/"

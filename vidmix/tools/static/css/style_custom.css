@@ -1,0 +1,80 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* --------- MARGIN STYLES--------- */
+.mt-6{
+  margin-top: 13vh;
+}
+
+/* --------- HEADER STYLES--------- */
+.main_head{
+  margin-top: 12vh; 
+  font-size: 7.5vw;
+}
+.head_r{
+  -webkit-transition: margin-right 0.7s; /* For Safari 3.1 to 6.0 */
+  transition: margin-right 0.7s;
+}
+.head_r:hover {
+  margin-right: 1vw;
+}
+.head_l{
+  color: #ac1f1f;
+  -webkit-transition: margin-left 0.4s; /* For Safari 3.1 to 6.0 */
+  transition: margin-left 0.4s;
+}
+.head_l:hover {
+  margin-left: 1vw;
+}
+
+
+/* --------- NAVBAR STYLES--------- */
+.nav-item{
+  margin-left: 12px;
+}
+
+
+/* --------- HOME PAGE STYLES--------- */
+.asset_l{
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
+}
+.asset_l:hover{
+  width: 80px;
+  height: auto;
+}
+.asset_r{
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
+}
+.asset_r:hover{
+  width: 70px;
+  height: auto;
+}
+
+
+/* --------- FOOTER STYLES --------- */
+html{
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 50px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+}
+.footer-copyright a{
+  color: black;
+}
+.footer-copyright a:hover{
+  color: #ac1f1f;
+  cursor: pointer;
+}
