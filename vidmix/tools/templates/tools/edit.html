@@ -1,0 +1,174 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+  <!-- CSS Links  -->
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css" />
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"> -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="{%static 'css/style_custom.css' %}">
+
+  <!-- JavaScript Links  -->
+  <script src="{%static 'js/jquery-3.4.1.js' %} "></script>
+  <script src="{%static 'js/bootstrap.min.js' %} "></script>
+  <script src="{%static 'js/angular.min.js' %} "></script>
+  <script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> -->
+  <script src="{%static 'js/vidmix_custom.js' %} "></script>
+  <script src="{%static 'js/angular_custom.js' %} "></script>
+  <title>
+    EDIT | VidMIX
+  </title>
+
+</head>
+
+<body>
+  {% include 'tools/navbar.html' %}
+  {% include 'tools/modal.html' %}
+  <div class="container-fluid" ng-app="angularApp">
+    <!-- VIDEO DISPLAY -->
+    <div class="row row-cols-1 row-cols-lg-2" style="margin-top: 50px;">
+      <div class="col-lg-5 col-12 mb-3 order-1">
+        <div class="card h-100 shadow-sm">
+          <video id="vplay" poster="{% static 'images/poster.jpg' %}" class="js-player card-img-top">
+            <source src="{{ MEDIA_URL }}{{videofile}}" />
+            <track kind="captions" label="English captions" src="{{ MEDIA_URL }}{{subfile}}" srclang="en" default />
+          </video>
+          <div class="card-body">
+            <div class="row px-3 py-0">
+              <p class="card-title h4 mt-1">Video Title : {{title}}</p>
+              <div class="ml-auto">
+                <button type="button" class="btn btn-outline-primary shadow-sm border m-0" data-toggle="collapse"
+                  data-target="#information"><i class="fas fa-info"></i></button>
+              </div>
+            </div>
+            <div id="information" class="collapse in">
+              <p class="font-weight-bold text-muted mb-0">
+                Metadata:
+                major_brand : mp42 <br>
+                minor_version : 0 <br>
+                compatible_brands: isommp42 <br>
+                creation_time : 2018-10-25T19:18:04.000000Z <br>
+                Duration: 00:03:27.21, start: 0.000000, bitrate: 572 kb/s <br>
+                Stream #0:0(und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709), 1280x720 [SAR 1:1 DAR
+                16:9],
+                443
+                kb/s, 24 fps, 24 tbr, 90k tbn, 48 tbc (default)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7 col-12 mb-3 pl-lg-1 order-lg-2 order-3">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <div class="row px-3 py-0">
+              <p class="card-title h4 mt-1">Subtitle : {{title}}</p>
+              <div class="ml-auto">
+                <button type="button" class="btn btn-outline-primary shadow-sm border m-0" data-toggle="modal"
+                  data-target="#HelpModal"><i class="fas fa-question-circle"></i></button>
+              </div>
+            </div>
+            <div style="overflow-x:auto;">
+              <table id="example" class="table table-borderless table-hover table-responsive-lg w-100">
+                <thead class="bg-light">
+                  <tr class="table-active">
+                    <th scope="col">Seq No</th>
+                    <th scope="col">Time Start</th>
+                    <th scope="col">Time End</th>
+                    <th scope="col">Subtitle</th>
+                    <th scope="col">Audio </th>
+                  </tr>
+                </thead>
+                <tbody class="text-muted">
+                  {% for dis in display %}
+                  <tr>
+                    <th scope="row" class="pl-4">{{dis.0}}</th>
+                    <td>{{dis.1}}</td>
+                    <td>{{dis.2}}</td>
+                    <td>{{dis.3}}</td>
+                    <td>
+                      <span ng-controller="btnCtrl">
+                        <button
+                          ng-click="$evalAsync(single('{{ MEDIA_URL }}{{ audio_path }}/op_{{dis.0}}.mp3','audio_{{dis.0}}.mp3', '{{dis.4}}' ))"
+                          data-target="#audioUpload" ng-dblclick="double()" class="btn btn-primary border-0 shadow-sm">
+                          audio_{{dis.0}}.mp3
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot class="bg-light text-muted">
+                  <tr>
+                    <th scope="col">Seq No</th>
+                    <th scope="col">Time Start</th>
+                    <th scope="col">Time End</th>
+                    <th scope="col">Subtitle</th>
+                    <th scope="col" class="p-3">Audio</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <p class="card-text text-right"><small class="text-muted">*Select checkboxes for audio replace</small></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-12 mb-3 order-lg-2 order-2">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <p class="card-title h4">Audio Title :
+              <span id="title">audio_1.mp3 </span>
+            </p>
+            <audio id="player1" class="js-player">
+              <source src="{{ MEDIA_URL }}{{ audio_path }}/op_1.mp3" />
+            </audio>
+            <p class="card-text text-right"><small class="text-muted">*Audio of respective subtitle</small></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7 col-12 mb-3 pl-1 order-4 d-none d-md-block">
+        <div class="card bg-dark text-white shadow-sm h-100">
+          <div class="card-body">
+            <div class="row justify-content-center font-weight-bolder display-1 py-auto">
+              <div class="col-auto head_r">VidMIX</div>
+              <div class="col-auto head_l"><i class="fas fa-fast-forward "></i></div>
+            </div>
+            <p class="card-text text-right"><small class="text-muted">© 2020 <a href="{% url 'home' %}"> VidMIX.com </a>
+                | T
+                & C Apply</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+    </script>
+    <script type="text/javascript">
+      $(window).on('load', function () {
+        $('#HelpModal').modal('show');
+      });
+    </script>
+  </div>
+
+  {% include 'tools/footer.html' %}
+
+</body>
+
+</html>

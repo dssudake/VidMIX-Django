@@ -1,0 +1,64 @@
+{% extends "tools/base.html" %}
+{% load static %}
+
+
+{% block title %}
+TOOLS | VidMIX
+{% endblock %}
+
+
+{% block content %}
+
+<!-- BRAND HEADER -->
+<div class="d-none d-md-block">
+  <div class="display-1 row justify-content-center font-weight-bolder mt-6">
+    <div class="col-auto">VidMIX</div>
+    <div class="col-auto" style="color: #ac1f1f;"><i class="fas fa-fast-forward "></i></div>
+  </div>
+</div>
+<div class="row justify-content-center font-weight-bolder mt-6 display-3 d-md-none">
+  <div class="col-auto mr-0 pr-0">VidMIX</div>
+  <div class="col-auto" style="color: #ac1f1f;"><i class="fas fa-fast-forward "></i></div>
+</div>
+
+<!-- UPLOAD FORM -->
+<div class="row justify-content-center mt-5">
+  <div class="col-xl-3 col-lg-5 col-md-6 col-sm-8 col-9 border rounded p-3 m-3 shadow-sm">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <p class="h5 font-weight-bold alert alert-dark text-center">UPLOAD VIDEO</i></p>
+      </div>
+      <div class="fieldWrapper form-group">
+        {{ form.name.errors }}
+        {{ form.name }}
+      </div>
+      <div class="fieldWrapper form-group ">
+        {{ form.videofile.errors }}
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" accept="video/*" name="{{ form.videofile.html_name }}"
+            id="{{ form.videofile.id_for_label }}" required>
+          <label class="custom-file-label" for="{{ form.videofile.id_for_label }}">Select Video</label>
+        </div>
+      </div>
+      <div class="fieldWrapper form-group">
+        {{ form.subfile.errors }}
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" accept=".srt" name="{{ form.subfile.html_name }}"
+            id="{{ form.subfile.id_for_label }}" required>
+          <label class="custom-file-label" for="{{ form.subfile.id_for_label }}">Select Subtitle</label>
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-outline-primary border form-control shadow-sm">UPLOAD</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  $(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+</script>
+{% endblock %}
