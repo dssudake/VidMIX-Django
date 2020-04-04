@@ -1,3 +1,4 @@
+{% load static %}
 <!-- HELP Modal -->
 <div class="modal fade" id="HelpModal" tabindex="-1" role="dialog" aria-labelledby="HelpModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -10,11 +11,14 @@
         </button>
       </div>
       <div class="modal-body">
-        Dashboard features : <br>
-        1 . Single click for listening Audio. <br>
-        2 . Double Click for audio change form. <br>
-        3 . Click Info [ <i class="fas fa-info"></i> ] button for more information. <br>
-        4 . Click Info [ <i class="fas fa-question-circle"></i> ] button for more Help. <br>
+        <div class="h5 font-weight-bold text-muted">Dashboard features :</div>
+        1 . <b>Single Click</b> button for listening Audio<br>
+        <div class="p-0 m-0 my-2">2 . <b>Double Click</b> button for Audio change form<br></div>
+        3 . Click <button type="button" class="btn btn-outline-primary shadow-sm border py-0 my-1"><i
+            class="fas fa-info"></i></button> &nbsp;for more information<br>
+        4 . Click <button type="button" class="btn btn-outline-primary shadow-sm border py-0 my-1"><i
+            class="fas fa-question-circle"></i></button> &nbsp;for more Help <br>
+        5 . <button class="btn btn-primary border-0 shadow-sm border py-0 my-1"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download</button> button will appear if changes has been done
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
@@ -24,8 +28,8 @@
 </div>
 
 <!-- Audio Replace Modal -->
-<div class="modal fade" id="audioUpload" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="audioUpload" tabindex="-1" role="dialog" 
+ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content ">
       <form ng-controller="formCtrl">
@@ -37,7 +41,7 @@
         </div>
         <div class="modal-body p-3 pt-4">
           <div class="form-group pb-2">
-            <p class="h5 text-center">Audio</p>
+            <p class="h5 text-center">audio_{$ mtitle $}.mp3</p>
           </div>
           <div class="form-group">
             <input type="text" class="form-control" ng-model="replace.subtitle" placeholder="Subtitle text ..."
@@ -47,15 +51,61 @@
             <input type="file" class="custom-file-input" file-model="replace.audio" id="changeAudio" name="myfile" accept="audio/*">
             <label id="changeAudioLabel" class="custom-file-label" for="changeAudio">Choose file</label>
           </div>
-          <div>
-            <p><!-- {$ object.read $} --></p>
-          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
           <button type="button" ng-click="submit($event)" class="btn btn-outline-primary">Save changes</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- Comapre and Download modal -->
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Compare / Download</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <div class="card h-100 shadow-sm">
+              <video id="replaceVplay" poster="{% static 'images/poster.jpg' %}" class="js-player card-img-top">
+                <source src="{{ MEDIA_URL }}{{ id }}/video/new.mp4" />
+                <track kind="captions" label="English captions" src="{{ MEDIA_URL }}{{subfile}}" srclang="en" default />
+              </video>
+              <div class="card-body">
+                <div class="row px-3 py-0">
+                  <p class="card-title h5 mt-1">{{title}} : <span class="text-muted">(Edited)</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12 mt-lg-0 mt-3">
+            <div class="card h-100 shadow-sm">
+              <video id="vplay" poster="{% static 'images/poster.jpg' %}" class="js-player card-img-top" muted>
+                <source src="{{ MEDIA_URL }}{{videofile}}" />
+                <track kind="captions" label="English captions" src="{{ MEDIA_URL }}{{subfile}}" srclang="en" default />
+              </video>
+              <div class="card-body">
+                <div class="row px-3 py-0">
+                  <p class="card-title h5 mt-1">{{title}} : <span class="text-muted">(Original)</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <a class="btn btn-primary border-0 shadow-sm" href="{{ MEDIA_URL }}{{ id }}/video/new.mp4" download><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download</a>
+      </div>
     </div>
   </div>
 </div>

@@ -33,13 +33,13 @@
 
 <body>
   {% include 'tools/navbar.html' %}
-  {% include 'tools/modal.html' %}
   <div class="container-fluid" ng-app="angularApp">
+    {% include 'tools/modal.html' %}
     <!-- VIDEO DISPLAY -->
     <div class="row row-cols-1 row-cols-lg-2" style="margin-top: 50px;">
       <div class="col-lg-5 col-12 mb-3 order-1">
         <div class="card h-100 shadow-sm">
-          <video id="vplay" poster="{% static 'images/poster.jpg' %}" class="js-player card-img-top">
+          <video id="vplay" poster="{% static 'images/poster.jpg' %}" class="js-player card-img-top" muted>
             <source src="{{ MEDIA_URL }}{{videofile}}" />
             <track kind="captions" label="English captions" src="{{ MEDIA_URL }}{{subfile}}" srclang="en" default />
           </video>
@@ -75,6 +75,9 @@
             <div class="row px-3 py-0">
               <p class="card-title h4 mt-1">Subtitle : {{title}}</p>
               <div class="ml-auto">
+                <span class="invisible" id="download">
+                  <button type="button" class="btn btn-primary border-0 shadow-sm mr-2" data-toggle="modal" data-target=".bd-example-modal-xl">Compare / Download</button>
+                </span>
                 <button type="button" class="btn btn-outline-primary shadow-sm border m-0" data-toggle="modal"
                   data-target="#HelpModal"><i class="fas fa-question-circle"></i></button>
               </div>
@@ -100,7 +103,7 @@
                     <td>
                       <span ng-controller="btnCtrl">
                         <button
-                          ng-click="$evalAsync(single('{{ MEDIA_URL }}{{ audio_path }}/op_{{dis.0}}.mp3','audio_{{dis.0}}.mp3', '{{dis.4}}' ))"
+                          ng-click="$evalAsync(single('{{ MEDIA_URL }}{{ audio_path }}/op_{{dis.0}}.mp3','{{dis.0}}', '{{dis.4}}' ))"
                           data-target="#audioUpload" ng-dblclick="double()" class="btn btn-primary border-0 shadow-sm">
                           audio_{{dis.0}}.mp3
                         </button>
@@ -120,7 +123,7 @@
                 </tfoot>
               </table>
             </div>
-            <p class="card-text text-right"><small class="text-muted">*Select checkboxes for audio replace</small></p>
+            <p class="card-text text-right"><small class="text-muted">*Double click Button for audio replace</small></p>
           </div>
         </div>
       </div>

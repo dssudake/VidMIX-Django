@@ -13,5 +13,5 @@ urlpatterns = [
 urlpatterns += [
   path('tools/' , views.tools , name='tools'),
   path('tools/edit/<int:video_id>' , views.edit , name='edit'),
-  path('replace/', views.replace , name='replace'),
+  path('upload/<int:video_id>/<int:audio_id>/', views.replace , name='replace'),
 ]

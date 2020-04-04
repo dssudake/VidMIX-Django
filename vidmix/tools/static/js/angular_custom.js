@@ -60,9 +60,12 @@ app.service('multipartForm', ['$http', function ($http) {
       headers: { 'Content-Type': undefined }
     }).then(function success(response) {
       console.log(response.data.success);
-      $scope.object.read = response.data.success;
-      $scope.replace = angular.copy({});
-      // $scope.reset();
+      document.getElementById("download").className = "visible";
+      document.getElementById("replaceVplay").load();
+      var display = response.data.success;
+      display.concat("Audio For subtitle",response.data.audioid,"has been changed, Go to COMPARE to see changes")
+      $('#audioUpload').modal('hide');
+      alert(response.data.success.concat(" Audio For subtitle ", response.data.audioid," has been changed, Go to compare to see changes"));
     }, function error(response) {
       alert(response.statusText);
     });
@@ -71,11 +74,10 @@ app.service('multipartForm', ['$http', function ($http) {
 
 app.controller('formCtrl', ['$scope', 'multipartForm', function ($scope, multipartForm) {
   $scope.replace = {};
-  $scope.object = { "read": "Fill the Form" }
   $scope.submit = function ($event) {
     $event.preventDefault();
-    $scope.replace = {};
-    var uploadUrl = '/replace/';
+    var videoId = window.location.pathname.split('/')[3];
+    var uploadUrl = "/upload/".concat(videoId, "/", $scope.mtitle, "/");
     multipartForm.post(uploadUrl, $scope.replace);
-	}
+  }
 }]);
